@@ -6,8 +6,8 @@ without looking anything up. Readability should not cost quality or performance.
 The rules below only rule out Python shortcuts that make no measurable
 difference to either.
 
-`services/customers` is the worked example of every rule here. When in doubt,
-copy what it does.
+A target repo that adopts this standard should name a worked example of these
+rules in its `AGENTS.md` (its reference pattern). When in doubt, copy what it does.
 
 ## 1. Principles
 
@@ -147,9 +147,8 @@ is silently dropped. Each service has guard tests that:
 2. create and update a record with every field set, and check that every field
    comes back.
 
-See `test_guard_data_covers_every_schema_field`,
-`test_create_stores_every_field` and `test_update_stores_every_field` in
-`services/customers/tests/test_customers.py`.
+For example, tests named `test_guard_data_covers_every_schema_field`,
+`test_create_stores_every_field` and `test_update_stores_every_field`.
 
 **Re-raising errors.** Inside an `except` block, raise the new error
 `from error`. This records the original error as the cause, which shows up in
@@ -235,7 +234,7 @@ Docs: <https://docs.pytest.org/en/stable/how-to/fixtures.html>
 - `AGENTS.md` requires every change to follow this file, and lists it in the
   definition of done.
 - Reviewers check it on every PR.
-- `ruff` (`make lint`) catches formatting and some error-prone patterns.
+- The repo's lint command (e.g. `ruff`) catches formatting and some error-prone patterns.
   Ruff is not yet configured to check the rules in this file automatically.
 - Deliberate exceptions are allowed, but they must be marked and explained
   (see section 11).
