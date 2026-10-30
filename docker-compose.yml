@@ -1,0 +1,29 @@
+services:
+  customers:
+    build: ./services/customers
+    ports: ["8001:8000"]
+    environment:
+      DATABASE_URL: sqlite:////data/customers.db
+    volumes: [customers-data:/data]
+
+  products:
+    build: ./services/products
+    ports: ["8002:8000"]
+    environment:
+      DATABASE_URL: sqlite:////data/products.db
+    volumes: [products-data:/data]
+
+  orders:
+    build: ./services/orders
+    ports: ["8003:8000"]
+    environment:
+      DATABASE_URL: sqlite:////data/orders.db
+      CUSTOMERS_URL: http://customers:8000
+      PRODUCTS_URL: http://products:8000
+    volumes: [orders-data:/data]
+    depends_on: [customers, products]
+
+volumes:
+  customers-data:
+  products-data:
+  orders-data:

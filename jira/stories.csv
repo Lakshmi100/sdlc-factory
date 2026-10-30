@@ -1,0 +1,75 @@
+"Summary","Issue Type","Description","Labels","Labels","Labels","Labels","Labels","Story Points"
+"Add phone number to customers","Story","Customers need an optional phone number.
+
+Acceptance criteria:
+- Customer has an optional phone field (string, max 30 chars)
+- POST and PUT accept phone; GET returns it (null when not set)
+- A phone longer than 30 chars returns 422
+- Existing tests still pass","customers","easy","factory","","","1"
+"Products CRUD","Story","Implement create, read, update, delete and list for products, mirroring services/customers.
+
+Acceptance criteria:
+- Product fields: id, sku (unique), name, description (optional), price (decimal, > 0), created_at, updated_at
+- Endpoints: POST /products, GET /products, GET /products/{id}, PUT /products/{id}, DELETE /products/{id}
+- Duplicate sku returns 409; missing product returns 404; price <= 0 returns 422
+- Tests cover every endpoint and every error case above","products","medium","factory","","","3"
+"Orders CRUD with line items","Story","Implement orders in services/orders. No cross-service validation yet (that is RETAIL-4).
+
+Acceptance criteria:
+- Order fields: id, customer_id, status (pending | confirmed | cancelled, default pending), created_at, updated_at
+- An order has one or more line items: product_id, quantity (>= 1), unit_price (> 0)
+- Endpoints: POST /orders, GET /orders, GET /orders/{id}, PUT /orders/{id}, DELETE /orders/{id}
+- An order with zero line items returns 422
+- Tests cover every endpoint and error case","orders","medium","factory","","","5"
+"Validate customer and products when creating an order","Story","Orders must reference real customers and products. Call the customers and products services over HTTP using CUSTOMERS_URL and PRODUCTS_URL.
+
+Acceptance criteria:
+- POST and PUT /orders return 422 with a clear message if the customer does not exist
+- POST and PUT /orders return 422 naming the missing product_id(s) if any product does not exist
+- If a dependent service is unreachable, return 503
+- HTTP calls are mocked in tests; no test needs other services running
+- Depends on RETAIL-2 and RETAIL-3","orders","cross-service","hard","factory","","5"
+"Add pagination to all list endpoints","Story","List endpoints currently return everything.
+
+Acceptance criteria:
+- GET /customers, /products and /orders accept limit (default 50, max 200) and offset (default 0)
+- limit outside 1..200 or negative offset returns 422
+- Behaviour is identical across all three services
+- Each service has tests for defaults, custom values and invalid values","customers","products","orders","parallel","factory","3"
+"Search customers by email","Story","Support finding a customer by email.
+
+Acceptance criteria:
+- GET /customers?email=<address> returns a list containing only the matching customer, or an empty list
+- Matching is case-insensitive
+- Tests cover match, no match and mixed case","customers","easy","factory","","","1"
+"Return order total","Story","Clients need the order total without summing line items themselves.
+
+Acceptance criteria:
+- Order responses include total = sum(quantity * unit_price) across line items
+- total is computed, not stored
+- Tests cover single and multiple line items
+- Depends on RETAIL-3","orders","easy","factory","","","2"
+"Handle deleting a customer who has orders","Story","Today a customer can be deleted even if they have orders. Decide and implement the right behaviour.
+
+Acceptance criteria:
+- Deleting a customer who has orders must not leave the system in an inconsistent state
+- Behaviour is documented in the PR","customers","orders","ambiguous","factory","","3"
+"Coding style guide and readability refactor","Story","Code should be easy to read for developers who are not Python experts, without losing quality or performance.
+
+Acceptance criteria:
+- style.md at the repo root defines the coding style, with examples from this codebase
+- CLAUDE.md requires all code to follow style.md and adds it to the definition of done
+- services/customers (app and tests) follows style.md, with no change in API behaviour
+- Create and update copy fields explicitly, with a comment showing the shorter Python alternative
+- Guard tests fail if a field is added to the schemas but not copied by create or update
+- The products and orders scaffolds follow style.md
+- All existing tests still pass","customers","products","orders","refactor","factory","3"
+"Block deleting a product that orders refer to","Story","Today a product can be deleted even when orders refer to it (deferred from RETAIL-2). Products must ask the orders service before deleting, over HTTP using an ORDERS_URL environment variable.
+
+Acceptance criteria:
+- DELETE /products/{id} returns 409 with a clear message if any order has a line item for that product_id
+- DELETE /products/{id} still returns 204 when no order refers to the product, and 404 when the product does not exist
+- If the orders service is unreachable, DELETE returns 503 and the product is not deleted
+- The orders service exposes a way to find orders by product_id; document the contract in the PR
+- HTTP calls are mocked in tests; no test needs other services running
+- Depends on RETAIL-2 and RETAIL-3","products","orders","cross-service","factory","","3"
