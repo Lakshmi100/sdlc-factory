@@ -44,6 +44,10 @@ Ordered by points recovered, largest first.
 |---|----------|----------|----------------|
 | Q1 | C2 | | |
 
+## Nice to know
+Points that would not change the design, the tests or the delivery. No
+points deducted; not counted in "questions".
+
 ## Design detail to confirm
 Design choices found in the story. For each, keep it as a constraint (and add
 the reason to the story) or remove it and leave it to the architect.

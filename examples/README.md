@@ -10,3 +10,5 @@ Records of real factory runs, kept unchanged.
   - calibrating the story reviewer: `story.md` is the story as written, and
     `design-feedback.md` shows the gaps the human had to fill over 5 design-gate
     rounds (length limits, price precision, whitespace, sku case, delete rules).
+- **calibration/RETAIL-2/**: blind runs of the story reviewer on the
+  RETAIL-2 story, with a comparison against the real design-gate feedback.

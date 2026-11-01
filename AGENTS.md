@@ -27,6 +27,7 @@ installed into target repos with `scripts/install.sh`, and stories run there.
   point to it; they don't repeat it.
 - **Output files are a contract.** If you change what an agent writes, update
   its template in `docs/stories/_templates/` and every agent that reads it.
-- **Don't edit `examples/`.** They are records of real runs.
+- **Don't edit `examples/`.** They are records of real runs. Add new runs
+  (e.g. calibration runs after changing an agent) as new files.
 - Test a change by installing into a scratch repo
   (`./scripts/install.sh /path/to/scratch`) and running a story there.

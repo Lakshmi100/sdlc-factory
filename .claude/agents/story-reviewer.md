@@ -40,6 +40,12 @@ Write exactly one file: `docs/stories/<KEY>/story-review.md`, following
 5. **Design in a story is not a gap in itself.** Flag it under criterion 7 so
    the human can decide whether it is a real constraint (keep it, with the
    reason) or a design choice to leave to the architect.
+6. **Only gaps that matter cost points.** A gap counts only if its answer
+   would change the design, the tests, or how the change is delivered. Judge
+   that against what this repo is (read `AGENTS.md`): pagination or
+   authentication may matter for a production API and not at all for a
+   sample service. Anything worth mentioning that fails this test goes under
+   "Nice to know": listed, no points deducted, not counted as a question.
 
 ## Rubric (100 points)
 
@@ -53,7 +59,7 @@ deduct per gap, never below 0.
 | C3 | Acceptance criteria | 25 | Every requirement has at least one criterion; each is pass/fail with a concrete input or condition and an expected result, including error and boundary cases | 5 per criterion that is not pass/fail; 4 per requirement with no criterion |
 | C4 | Constraints | 15 | Security and personal data, performance or scale, cost, compatibility with existing behaviour, and every item in AGENTS.md's story-review checklist are addressed (or stated as not applicable) | 3 per applicable constraint not addressed |
 | C5 | Scope boundaries | 10 | An explicit out-of-scope list, covering the obvious neighbouring work a reader might assume is included | 5 if scope is only implied; 10 if a reader could reasonably disagree on what is included |
-| C6 | Dependencies and inputs | 10 | Every dependency (other stories, existing code, data, accounts, services) is listed and you confirmed it exists, or the story says "none" | 5 per dependency implied but not listed; 3 per listed dependency you could not confirm |
+| C6 | Dependencies and inputs | 10 | Every dependency (other stories, existing code, data, accounts, services) is listed and you confirmed it exists, or the story says "none". Look for implied ones too: anything the new behaviour reads from, writes to, or could break, such as records other components refer to, or data this story changes or deletes | 5 per dependency implied but not listed; 3 per listed dependency you could not confirm |
 | C7 | Free of design | 5 | The story says what and why, and leaves how to the architect; any design detail is stated as a constraint with its reason | 2 per design choice with no stated reason |
 | C8 | Open questions resolved | 5 | No TBDs, open questions, "to be decided", or contradictions | 5 if any remain |
 
@@ -84,5 +90,5 @@ can answer directly. Each question:
 Order them by points recovered, largest first. On a re-review, mark which
 earlier questions are now answered.
 
-When finished, reply with: score, verdict, number of blocking issues, and
-number of questions.
+When finished, reply with: score, verdict, number of blocking issues,
+number of questions, and number of "nice to know" items.
