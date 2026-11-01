@@ -8,10 +8,10 @@ installed into target repos with `scripts/install.sh`, and stories run there.
 
 | Path | What it holds |
 |------|---------------|
-| `.claude/agents/` | Subagents: architect, tester, implementer, reviewer |
+| `.claude/agents/` | Subagents: story-reviewer, architect, tester, implementer, reviewer |
 | `.claude/commands/story.md` | The `/story` orchestrator |
 | `.claude/factory/RULES.md` | Pipeline rules every target repo gets: story workspace, git conventions, definition of done, boundaries |
-| `docs/stories/_templates/` | Templates for design, test plan, review |
+| `docs/stories/_templates/` | Templates for story review, design, test plan, review |
 | `standards/` | Reusable coding standards a target repo can opt into from its `AGENTS.md` |
 | `templates/` | Starter `AGENTS.md` and PR template for target repos |
 | `scripts/install.sh` | Installs or updates the factory in a target repo |

@@ -15,6 +15,18 @@ rules (story workspace, git conventions, definition of done) live in
 - Source: GitHub Issues in `<owner>/<repo>` | Jira project `<KEY>`
 - Key prefix: `<PREFIX>` (story keys look like `<PREFIX>-<n>`)
 
+## Story review
+
+Readiness threshold: 80 <change only with a reason>
+
+Constraints every story in this repo must address (the story reviewer scores
+these under C4, "Constraints"):
+- <e.g. personal data: which fields are sensitive and how they are protected>
+- <e.g. cost: billable resources have a teardown check>
+
+Extra blocking rules (fail the gate whatever the score):
+- <e.g. B5: a story that creates cloud resources must say how they are torn down>
+
 ## Layout
 
 | Path | What it holds |

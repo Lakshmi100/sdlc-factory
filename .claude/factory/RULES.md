@@ -22,6 +22,7 @@ Each story gets a folder `docs/stories/<KEY>/`:
 | File                 | Written by    | Purpose                                     |
 |----------------------|---------------|---------------------------------------------|
 | story.md             | orchestrator  | The story as received, verbatim             |
+| story-review.md      | story-reviewer| Completeness score, gate verdict, questions |
 | design.md            | architect     | Analysis, contract, data model, risks       |
 | test-plan.md         | tester (plan) | Independent test cases from the story alone |
 | design-feedback.md   | human         | Feedback at the design gate (if any)        |
@@ -29,6 +30,13 @@ Each story gets a folder `docs/stories/<KEY>/`:
 | run-log.md           | orchestrator  | Timestamped events, the raw metrics data    |
 
 Templates are in `docs/stories/_templates/`.
+
+## Readiness gate
+
+A story goes to design only when the story reviewer scores it at or above
+the threshold (80 unless `AGENTS.md` sets another) with no blocking issues,
+or when the human explicitly overrides the gate. Overrides are logged in
+run-log.md with the human's reason.
 
 ## Definition of done
 
