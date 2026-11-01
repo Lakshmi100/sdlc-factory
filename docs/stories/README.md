@@ -1,14 +1,7 @@
 # Story workspaces
 
-Each story run by the factory gets a folder here, e.g. `RETAIL-2/`:
+Each story run by the SDLC Factory gets a folder here, named by its key,
+e.g. `ABC-4/`. The files in it, and who writes each one, are listed in
+`.claude/factory/RULES.md`. Templates are in `_templates/`.
 
-| File                 | Written by    | Purpose                                     |
-|----------------------|---------------|---------------------------------------------|
-| story.md             | orchestrator  | The story as received from Jira             |
-| design.md            | architect     | Analysis, API contract, data model, risks   |
-| test-plan.md         | tester (plan) | Independent test cases from the story alone |
-| design-feedback.md   | human         | Feedback at the design gate (if any)        |
-| review.md            | reviewer      | Verdict, traceability, rule checks          |
-| run-log.md           | orchestrator  | Timestamped events, the raw metrics data    |
-
-Run a story with: `/story RETAIL-<n>` in Claude Code.
+Run a story with: `/story <PREFIX>-<n>` in Claude Code.
